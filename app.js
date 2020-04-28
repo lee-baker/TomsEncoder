@@ -54,7 +54,7 @@ function decode(message) {
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!',
-    encoded: ''
+    message: 'Hello Stranger',
+    encoded: '67883 *}%?(47%'
   }
 })
