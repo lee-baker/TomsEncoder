@@ -56,7 +56,7 @@ var min = 32;
 var max = 126;
 
 function encodeNew(message){
-  var compressed = LZString.compressToBase64(message);
+  var compressed = message; // LZString.compressToBase64(message);
   var result = '';
   var randomNum = 0;
   for (var i = 0; i < compressed.length; i++) {
@@ -99,14 +99,14 @@ function decodeNew(message){
 
     result += encoded || message[i];
   }
-  return LZString.decompressFromBase64(result);
+  return result; // LZString.decompressFromBase64(result);
 }
 
 var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Stranger',
-    encoded: 'J.5Ac:Y0|-107-a-Z-TS;$=s}1yeaa',
+    encoded: 'J4QXX[j?`^MZSQ^',
     useNew: true
   }
 })
