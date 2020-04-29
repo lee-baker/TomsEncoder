@@ -19,15 +19,25 @@
   <div id="app">
     <div class="container">
       <div class="row">
+        <div class="col-sm">
+          <h1>Setup</h1>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="useNew">
+            <label class="custom-control-label" for="customSwitch1">Use new encoding</label>
+          </div>
+        </div>
 
+      </div>
+      <div class="row">
         <div class="col-sm">
           <h1>Endoder</h1>
+
           <textarea v-model="message" style="width: 100%"></textarea>
-          <div>
+          <div v-if="!useNew">
             <h3>Encoded Message</h3>
             {{ encode(message) }}
           </div>
-          <div>
+          <div v-if="useNew">
             <h3>Encoded Message with new method</h3>
             {{ encodeNew(message) }}
           </div>
@@ -35,11 +45,11 @@
         <div class="col-sm">
           <h1>Decoder</h1>
           <textarea v-model="encoded" style="width: 100%"></textarea>
-          <div>
+          <div v-if="!useNew">
             <h3>Decoded Message</h3>
             {{ decode(encoded) }}
           </div>
-          <div>
+          <div v-if="useNew">
             <h3>Decoded Message with new method</h3>
             {{ decodeNew(encoded) }}
           </div>

@@ -57,13 +57,11 @@ var min = 32;
 var max = 126;
 
 function encodeNew(message){
-  console.log("Encoding");
   var result = '';
   var randomNum = 0;
   for (var i = 0; i < message.length; i++) {
     if (i%chars === 0){
       randomNum = Math.min(max-min-chars, Math.max(min, Math.floor(Math.random() * (max-min-chars)) + chars));
-      console.log("Random", randomNum);
       result += String.fromCharCode(randomNum);
     }
 
@@ -74,24 +72,19 @@ function encodeNew(message){
     }
     var encoded = String.fromCharCode(newCharCode);
 
-    console.log(message[i], charCode, newCharCode, encoded);
-
     result += encoded || message[i];
   }
   return result;
 }
 
 function decodeNew(message){
-  console.log("Decoding");
   var result = '';
   var randomNum = 0;
   var rounds = 0;
   var nextRound = 0;
   for (var i = 0; i < message.length; i++) {
-    console.log("Next round", nextRound);
     if (i === nextRound){
       randomNum = message.charCodeAt(i);
-      console.log("Random", randomNum);
       rounds++;
       nextRound = (chars * rounds) + (rounds);
       continue;
@@ -104,8 +97,6 @@ function decodeNew(message){
     }
     var encoded = String.fromCharCode(newCharCode);
 
-    console.log(message[i], charCode, newCharCode, encoded);
-
     result += encoded || message[i];
   }
   return result;
@@ -115,6 +106,7 @@ var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Stranger',
-    encoded: '67883 *}%?(47%'
+    encoded: '67883 *}%?(47%',
+    useNew: false
   }
 })
