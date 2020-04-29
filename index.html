@@ -24,16 +24,25 @@
           <h1>Endoder</h1>
           <textarea v-model="message" style="width: 100%"></textarea>
           <div>
+            <h3>Encoded Message</h3>
             {{ encode(message) }}
+          </div>
+          <div>
+            <h3>Encoded Message with new method</h3>
+            {{ encodeNew(message) }}
           </div>
         </div>
         <div class="col-sm">
           <h1>Decoder</h1>
           <textarea v-model="encoded" style="width: 100%"></textarea>
           <div>
+            <h3>Decoded Message</h3>
             {{ decode(encoded) }}
           </div>
-
+          <div>
+            <h3>Decoded Message with new method</h3>
+            {{ decodeNew(encoded) }}
+          </div>
         </div>
 
       </div>
