@@ -10,9 +10,14 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-
+  <script language="javascript" src="lz-string.js"></script>
 
   <title>Toms encoder</title>
+  <style>
+    .result {
+      word-wrap: break-word;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,27 +34,27 @@
 
       </div>
       <div class="row">
-        <div class="col-sm">
+        <div class="col-sm-6">
           <h1>Encoder</h1>
 
           <textarea v-model="message" style="width: 100%"></textarea>
-          <div v-if="!useNew">
+          <div v-if="!useNew" class="alert alert-secondary result" role="alert">
             <h3>Encoded Message</h3>
             {{ encode(message) }}
           </div>
-          <div v-if="useNew">
+          <div v-if="useNew" class="alert alert-secondary result" role="alert">
             <h3>Encoded Message with new method</h3>
             {{ encodeNew(message) }}
           </div>
         </div>
-        <div class="col-sm">
+        <div class="col-sm-6">
           <h1>Decoder</h1>
           <textarea v-model="encoded" style="width: 100%"></textarea>
-          <div v-if="!useNew">
+          <div v-if="!useNew" class="alert alert-secondary result" role="alert">
             <h3>Decoded Message</h3>
             {{ decode(encoded) }}
           </div>
-          <div v-if="useNew">
+          <div v-if="useNew" class="alert alert-secondary result" role="alert">
             <h3>Decoded Message with new method</h3>
             {{ decodeNew(encoded) }}
           </div>

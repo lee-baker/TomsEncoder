@@ -52,27 +52,27 @@ function decode(message) {
 }
 
 var chars = 20;
-var randomRot = 30;
 var min = 32;
 var max = 126;
 
 function encodeNew(message){
+  var compressed = LZString.compressToBase64(message);
   var result = '';
   var randomNum = 0;
-  for (var i = 0; i < message.length; i++) {
+  for (var i = 0; i < compressed.length; i++) {
     if (i%chars === 0){
       randomNum = Math.min(max-min-chars, Math.max(min, Math.floor(Math.random() * (max-min-chars)) + chars));
       result += String.fromCharCode(randomNum);
     }
 
-    var charCode = message.charCodeAt(i);
+    var charCode = compressed.charCodeAt(i);
     var newCharCode = charCode + randomNum;
     if (newCharCode > max){
       newCharCode = (newCharCode - max) + min;
     }
     var encoded = String.fromCharCode(newCharCode);
 
-    result += encoded || message[i];
+    result += encoded || compressed[i];
   }
   return result;
 }
@@ -99,14 +99,14 @@ function decodeNew(message){
 
     result += encoded || message[i];
   }
-  return result;
+  return LZString.decompressFromBase64(result);
 }
 
 var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Stranger',
-    encoded: '67883 *}%?(47%',
-    useNew: false
+    encoded: 'J.5Ac:Y0|-107-a-Z-TS;$=s}1yeaa',
+    useNew: true
   }
 })
