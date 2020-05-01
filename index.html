@@ -13,6 +13,10 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script language="javascript" src="lz-string.js"></script>
+  <script language="javascript" src="keyEncoding.js"></script>
+  <script language="javascript" src="asciiRotEncoding.js"></script>
+  <script language="javascript" src="compressedAsciiRotEncoding.js"></script>
+  <script language="javascript" src="copyToClipboard.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
   <title>Tom's Secret Message Enigma Machine</title>
@@ -32,9 +36,17 @@
       <div class="row">
         <div class="col-sm mb-3">
           <h4>Setup</h4>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="useNew">
-            <label class="custom-control-label" for="customSwitch1">Use new encoding</label>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input class="custom-control-input" id="basicKey" type="radio" v-model="encodingType" value="1">
+            <label class="custom-control-label" for="basicKey">Basic Key Encoding</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input class="custom-control-input" id="asciiRot" type="radio" v-model="encodingType" value="2">
+            <label class="custom-control-label" for="asciiRot">Ascii Rot Encoding</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input class="custom-control-input" id="compressedAsciiRot" type="radio" v-model="encodingType" value="3">
+            <label class="custom-control-label" for="compressedAsciiRot">Ascii Rot Encoding compressed</label>
           </div>
         </div>
 
@@ -75,7 +87,7 @@
             <h5 class="container card-header">Key</h5>
             <div class="card-body">
               <p class="card-text">
-                <div class="container" v-if="!useNew">
+                <div class="container" v-if="encodingType == 1">
                   <div class="row justify-content-start">
                     <div class="col-1 mb-3" v-for="(item, index) in Object.keys(codeKey)">
                       {{ item }}<br />
@@ -83,14 +95,20 @@
                     </div>
                   </div>
                 </div>
-                <div v-if="useNew">
+                <div v-if="encodingType == 3">
+                  <p>
+                    Before encoding the message, this encoder first compresses the message using an LZ-based compression algorithm.<br>
+                    More info can be found at <a href="https://github.com/pieroxy/lz-string" target="_blank">https://github.com/pieroxy/lz-string</a>
+                  </p>
+                </div>
+                <div v-if="encodingType == 2 || encodingType == 3">
                   <p>
                     This encoding uses the ascii numbers of each letter (from 32 - 126) and rotates them a random number around. The random number changes every 20 letters.
                   </p>
                   <p>
                     The random number is stored as a letter, using its ascii code, in the encoded message before the 20 letters that it encodes. <br>
                     eg. In the encoded message <br>
-                    <span class="py-2 d-inline-block">*r188;J}@>-:31></span><br>
+                    <span class="py-2 d-inline-block font-weight-bold">*r188;J}@>-:31></span><br>
                     The * is the letter representing the random number, meaning for these letters they are rotated 42 ascii codes up.
                   </p>
                   <p>
@@ -116,8 +134,7 @@
             </h5>
             <div class="card-body">
               <p class="card-text">
-                <span v-if="useNew"> {{ decodeNew(encoded) }} </span>
-                <span v-if="!useNew"> {{ decode(encoded) }} </span>
+                <span> {{ decodedMessage }} </span>
               </p>
             </div>
           </div>
