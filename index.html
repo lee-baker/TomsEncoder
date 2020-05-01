@@ -71,17 +71,31 @@
               </p>
             </div>
           </div>
-          <div class="card mt-3" v-if="!useNew">
+          <div class="card mt-3">
             <h5 class="container card-header">Key</h5>
             <div class="card-body">
               <p class="card-text">
-                <div class="container">
+                <div class="container" v-if="!useNew">
                   <div class="row justify-content-start">
                     <div class="col-1 mb-3" v-for="(item, index) in Object.keys(codeKey)">
                       {{ item }}<br />
                       {{ codeKey[item] }}
                     </div>
                   </div>
+                </div>
+                <div v-if="useNew">
+                  <p>
+                    This encoding uses the ascii numbers of each letter (from 32 - 126) and rotates them a random number around. The random number changes every 20 letters.
+                  </p>
+                  <p>
+                    The random number is stored as a letter, using its ascii code, in the encoded message before the 20 letters that it encodes. <br>
+                    eg. In the encoded message <br>
+                    <span class="py-2 d-inline-block">*r188;J}@>-:31></span><br>
+                    The * is the letter representing the random number, meaning for these letters they are rotated 42 ascii codes up.
+                  </p>
+                  <p>
+                    The ascii codes can be seen at <a href="https://www.ascii-code.com/" target="_blank">https://www.ascii-code.com/</a>.
+                  </p>
                 </div>
               </p>
             </div>
