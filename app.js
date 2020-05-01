@@ -1,5 +1,5 @@
 
-var key = {
+var codeKey = {
   'A': '?',
   'B': '$',
   'C': '9',
@@ -28,12 +28,12 @@ var key = {
   'Z': '2',
 }
 
-var vals = _.invert(key);
+var vals = _.invert(codeKey);
 
 function encode(message) {
   var result = '';
   for (var i = 0; i < message.length; i++) {
-    var encoded = key[message[i].toUpperCase()];
+    var encoded = codeKey[message[i].toUpperCase()];
 
     result += encoded || message[i];
   }
@@ -108,8 +108,8 @@ var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Stranger',
-    encoded: 'J4QXX[j?`^MZSQ^',
-    useNew: true
+    encoded: '67883 *}%?(47%',
+    useNew: false
   },
   computed:{
     messageEncoded: function() {

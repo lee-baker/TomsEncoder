@@ -71,6 +71,21 @@
               </p>
             </div>
           </div>
+          <div class="card mt-3" v-if="!useNew">
+            <h5 class="container card-header">Key</h5>
+            <div class="card-body">
+              <p class="card-text">
+                <div class="container">
+                  <div class="row justify-content-start">
+                    <div class="col-1 mb-3" v-for="(item, index) in Object.keys(codeKey)">
+                      {{ item }}<br />
+                      {{ codeKey[item] }}
+                    </div>
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
         </div>
         <div class="col pb-5 pb-md-0">
           <div class="card mb-3">
